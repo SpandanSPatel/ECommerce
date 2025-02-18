@@ -18,5 +18,5 @@ def create_user(username, password, role):
 def authenticate_user(username, password):
     user = users_collection.find_one({"username": username})
     if user and user['password'] == password:
-        return True
-    return False
+        return {"username": user["username"], "role": user["role"]}
+    return None

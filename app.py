@@ -1,48 +1,42 @@
-from flask import Flask, request, jsonify, render_template, redirect, url_for, session
+from flask import Flask, request, jsonify
 from mongoDB import get_db, create_user, authenticate_user
+from flask_cors import CORS
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'
+CORS(app)
 
 # MongoDB setup
 db = get_db()
 
-@app.route('/login.html', methods=['GET', 'POST'])
+@app.route('/login', methods=['POST'])
 def login():
-    if request.method == 'POST':
-        data = request.get_json()
-        username = data['username']
-        password = data['password']
-        if authenticate_user(username, password):
-            session['user'] = username
-            return jsonify({"message": "Login successful!"})
-        else:
-            return jsonify({"message": "Invalid credentials!"}), 401
-    return render_template('login.html')
+    data = request.get_json()
+    username = data.get('username')
+    password = data.get('password')
 
-@app.route('/register.html', methods=['GET', 'POST'])
+    if not username or not password:
+        return jsonify({"message": "Username and password are required!"}), 400
+
+    user = authenticate_user(username, password)
+    if user:  # Check if user is not None (i.e., authentication successful)
+        return jsonify({"message": "Login successful!", "role": user['role']})
+    else:
+        return jsonify({"message": "Invalid credentials!"}), 401
+
+@app.route('/register', methods=['POST'])
 def register():
-    if request.method == 'POST':
-        data = request.get_json()
-        username = data['username']
-        password = data['password']
-        role = data['role']
-        if create_user(username, password, role):
-            return jsonify({"message": "Registration successful!"})
-        else:
-            return jsonify({"message": "Username already exists!"}), 400
-    return render_template('register.html')
+    data = request.get_json()
+    username = data.get('username')
+    password = data.get('password')
+    role = data.get('role')
 
-@app.route('/dashboard.html')
-def dashboard():
-    if 'user' not in session:
-        return redirect(url_for('login'))
-    return render_template('dashboard.html')
+    if not username or not password or not role:
+        return jsonify({"message": "All fields are required!"}), 400
 
-@app.route('/logout', methods=['POST'])
-def logout():
-    session.pop('user', None)
-    return jsonify({"message": "Logged out successfully!"})
+    if create_user(username, password, role):
+        return jsonify({"message": "Registration successful!"})
+    else:
+        return jsonify({"message": "Username already exists!"}), 400
 
 if __name__ == '__main__':
     app.run(debug=True)
