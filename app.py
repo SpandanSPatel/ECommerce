@@ -5,7 +5,6 @@ from datetime import datetime
 import uuid
 from flask_cors import CORS
 import os
-from werkzeug.utils import secure_filename
 from bson import ObjectId
 from bson.errors import InvalidId
 
@@ -155,7 +154,7 @@ def add_new_product():
     if not allowed_file(product_image.filename):
         return jsonify({"message": "Invalid file format!"}), 400
 
-    filename = secure_filename(product_image.filename)
+    filename = product_image.filename
     product_image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
     data = request.form
