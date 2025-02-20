@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buyer Dashboard</title>
+    <title>My Orders</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome Icons for the Navbar -->
@@ -57,7 +57,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="dashboard_buyer.html" style="pointer-events: none;" title="Home">
+                        <a class="nav-link" href="dashboard_buyer.html"  title="Home">
                             <i class="fas fa-home"></i>
                             <span class="icon-text">Home</span>
                         </a>
@@ -69,7 +69,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="myorder.html" title="Order History">
+                        <a class="nav-link" href="myorder.html" title="Order History"style="pointer-events: none;">
                             <i class="fas fa-history"></i>
                             <span class="icon-text">Order History</span>
                         </a>
@@ -91,19 +91,14 @@
         </div>
     </nav>
 
-    <!-- Dashboard Content -->
-    <!-- Dashboard Content -->
-    <div class="container mt-5 ml-5 mb-5">
-        <div class="row g-4" id="productContainer">
-            <!-- Products will be dynamically added here -->
+    <!-- Orders Section -->
+    <div class="container mt-5 p-4 bg-light rounded shadow-sm">
+        <h3 class="text-center mb-4">My Orders</h3>
+        <div id="orderList" class="row g-4 ">
+            <!-- Orders will be dynamically loaded here -->
         </div>
     </div>
-    
 
-    <!-- External JavaScript (app.js) -->
     <script src="app.js"></script>
-
-    <!-- Bootstrap JS (for interactive elements) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
