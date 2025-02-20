@@ -1,4 +1,4 @@
-const API_URL = 'https://ecommerce-website-j2rf.onrender.com'; // Update to your Flask API URL
+const API_URL = 'https://ecommerce-11ak.onrender.com'; // Update to your Flask API URL
 
 async function register() {
     const username = document.getElementById("registerUsername").value;
