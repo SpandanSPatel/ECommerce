@@ -8,6 +8,8 @@ import os
 from bson import ObjectId
 from bson.errors import InvalidId
 
+app = Flask(__name__)
+CORS(app)
 
 uri = "mongodb+srv://Spandan:33aFkXe2GQbd4khe@ecommerce.b6osl.mongodb.net/?retryWrites=true&w=majority&appName=ECommerce"
 client = MongoClient(uri, server_api=ServerApi('1'))
@@ -18,8 +20,7 @@ wallet_collection = db['Wallet']
 cart_collection=db['cart']
 orders_collection=db['orders']
 
-app = Flask(__name__)
-CORS(app)
+
 UPLOAD_FOLDER = './Images/'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
