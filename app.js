@@ -694,7 +694,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else if (window.location.pathname.endsWith("sales_history.html")) {
         fetchSellerOrders();
     }
-    if (window.location.pathname.endsWith("dashboard_buyer.html") || window.location.pathname.endsWith("dashboard_seller.html")) {
+    if (window.location.pathname.endsWith("dashboard_buyer.html") || window.location.pathname.endsWith("dashboard_seller.html")||window.location.pathname.endsWith("add_product.html")||window.location.pathname.endsWith("cart.html")||window.location.pathname.endsWith("myorder.html")||window.location.pathname.endsWith("sales_history.html")||window.location.pathname.endsWith("wallet_buyer.html")||window.location.pathname.endsWith("wallet_seller.html")) {
         const username = sessionStorage.getItem("username");
         if (!username) {
             alert("No active session found. Please log in again.");
